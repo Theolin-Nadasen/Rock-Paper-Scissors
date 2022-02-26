@@ -2,20 +2,24 @@ import kotlin.random.Random
 
 fun play(): Int{
     print("[R]ock, [P]aper or [S]cissors? ")
-    val player : String = readLine().toString().uppercase()
+    var player : String? = readLine().toString().uppercase()
 
     when (player) {
-        "R" -> println("you chose rock!")
-        "P" -> println("you chose paper!")
-        "S" -> println("you chose scissors!")
-        else -> println("$player is not an option.")
+        "R" -> println("you chose rock!\n")
+        "P" -> println("you chose paper!\n")
+        "S" -> println("you chose scissors!\n")
+        else -> {
+            println("$player is not an option.\n")
+            player = null
+        }
     }
 
     val enemy : String = Enemy()
-    when (enemy) {
-        "0" -> println("enemy chose rock!")
-        "1" -> println("enemy chose paper!")
-        "2" -> println("enemy chose scissors!")
+    when {
+        player == null -> Unit
+        enemy == "0" -> println("enemy chose rock!\n")
+        enemy == "1" -> println("enemy chose paper!\n")
+        enemy == "2" -> println("enemy chose scissors!\n")
     }
 
     val result = "$player$enemy"
@@ -29,7 +33,7 @@ fun play(): Int{
         "S0" -> return -1
         "S1" -> return 1
         "S2" -> return 0
-        else -> return 0
+        else -> return play()
     }
 }
 
@@ -41,12 +45,22 @@ fun Enemy() : String{
 fun main() {
     var score = 0
     for (i in 1..3) {
-        score = score + play()
+        when(play()){
+            0 -> println("Round $i : Draw\n")
+            1 -> {
+                score = score + 1
+                println("Round $i : You Win!\n")
+            }
+            -1 -> {
+                score = score - 1
+                println("Round $i : You Lose!\n")
+            }
+        }
     }
 
     when {
-        score < 0 -> println("you lose!")
-        score == 0 -> println("draw")
-        score > 0 -> println("you win!")
+        score < 0 -> println("End Result : You Lose!\n")
+        score == 0 -> println("End Result : Draw\n")
+        score > 0 -> println("End Result : You Win!\n")
     }
 }
