@@ -1,6 +1,6 @@
-#Rock, Paper, Scissors
+# Rock, Paper, Scissors
 
-##How to play:
+## How to play:
     select [R], [P] or [S] for Rock, Paper or Scissors.
     the enemy will then make a choice.
     
